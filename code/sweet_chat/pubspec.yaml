@@ -1,0 +1,71 @@
+name: sweet_chat
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  badges: ^3.1.2
+  chatview: ^2.4.0
+  cloud_firestore: ^5.6.1
+  cloudinary: ^1.2.0
+  cloudinary_api: ^1.1.0
+  dio: ^5.7.0
+  file_picker_pro: ^1.8.0
+  firebase_auth: ^5.4.0
+  firebase_core: ^3.10.0
+  firebase_messaging: ^15.2.1
+  firebase_storage: ^12.4.0
+  flutter:
+    sdk: flutter
+  flutter_local_notifications: ^18.0.1
+  flutter_slidable: ^3.1.2
+  google_sign_in: ^6.2.2
+  googleapis_auth: ^1.6.0
+  http: ^1.2.2
+  icons_plus: ^5.0.0
+  internet_connection_checker_plus: ^2.7.0
+  just_audio: ^0.9.46
+  path_provider: ^2.1.5
+  pinput: ^5.0.1
+  shared_preferences: ^2.3.5
+  sqflite: ^2.4.1
+  toastification: ^2.3.0
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+
+flutter:
+  uses-material-design: true
+  assets:                                                                                                                                                                            
+    - imgs\papeterie.png
+    - imgs\wt1.jpg
+    - imgs\wt2.jpg
+    - imgs\wt3.jpg
+    - imgs\wt5.png
+    - imgs\wt6.png
+    - imgs\wt7.jpg
+    - imgs\wt8.jpeg
+    - imgs\wt9.png
+    - imgs\wt10.jpg
+    - imgs\wt11.jpeg
+    - imgs\wt12.png
+    - imgs\wt13.jpg
+    - imgs\wt14.jpg
+    - imgs\verified.png
+    - imgs\network.jpg
+    - imgs\logof.png
+    - imgs\flogof.png
+    - imgs\flogow.png
+    - imgs\logow.png
+    - lib/biblio/countries/assets/
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+
+

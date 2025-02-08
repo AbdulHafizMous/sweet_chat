@@ -1,0 +1,451 @@
+ keytool -list -v -alias <your-key-name> -keystore <path-to-production-keystore>
+
+ keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
+
+
+.android> keytool -list -v -keystore debug.keystore -alias androiddebugkey -storepass android -keypass android
+
+
+
+
+- notif voir profil au clic
+- mutual friends
+- story good
+- audio fichier
+
+- notifs push ...
+
+  https://sweet-chat-vf.firebaseapp.com/__/auth/handler
+
+
+mega et supabase ZHc2T39EkvW-jcr  ZHc2T39EkvW-jcr
+
+  user : O6X7C9xeN7ZM0yMPqxChrChkzAp1
+
+
+
+
+
+ConvexAppBar.badge({0: '99+', 1: Icons.assistant_photo, 2: Colors.redAccent},
+  items: [
+    TabItem(icon: Icons.home, title: 'Home'),
+    TabItem(icon: Icons.map, title: 'Discovery'), 
+    TabItem(icon: Icons.add, title: 'Add'),
+  ],
+  onTap: (int i) => print('click index=$i'),
+);
+
+
+
+
+
+
+ Scaffold(
+                body: StreamBuilder<List<Chat>>(
+                    stream:
+                        // FirebaseFirestore.instance.collection('user').snapshots(),
+                        _getChats(),
+                    builder: (context, notifSnapshot) {
+                      if (notifSnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return customShimmer();
+                      }
+
+                      if (notifSnapshot.hasError) {
+                        return SizedBox(
+                          height: scrH(context),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  BoxIcons.bx_error,
+                                  size: 50,
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "Loading Error ! ${notifSnapshot.error}",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+
+                      final chatLst = notifSnapshot.data!
+                          // .where(
+                          //   (d) => d.id != connectedUser.profile.id,
+                          // )
+                          // .toList()
+                          ;
+
+                      return chatLst.isEmpty
+                          ? SizedBox(
+                              height: scrH(context),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.query_stats_outlined,
+                                      size: 50,
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      "Nothing to Show !",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          : SizedBox(
+                              // color: Colors.redAccent,
+                              child: SingleChildScrollView(
+                                  controller: scCtrl,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        height: 60,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 10, bottom: 10, left: 10),
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(children: [
+                                            Tooltip(
+                                              message: "All Chats",
+                                              waitDuration:
+                                                  Duration(microseconds: 200),
+                                              preferBelow: false,
+                                              child: customButton(
+                                                  filter == 0
+                                                      ? theme.dred22
+                                                      : Color.fromRGBO(
+                                                          252, 252, 252, 0.72),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        "All",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      InkWell(
+                                                          child: Icon(
+                                                        filter == 0
+                                                            ? Icons.close
+                                                            : Icons.add,
+                                                        color: Colors.black,
+                                                        size: 15,
+                                                      )),
+                                                    ],
+                                                  ),
+                                                  25, () {
+                                                //
+                                                setState(() {
+                                                  filter = 0;
+                                                });
+                                              }, 7, opt: 2, bc: theme.dred1),
+                                            ),
+                                            //
+                                            SizedBox(width: 10),
+                                            Tooltip(
+                                              message: "Unread Chats",
+                                              waitDuration:
+                                                  Duration(microseconds: 200),
+                                              preferBelow: false,
+                                              child: customButton(
+                                                  filter == 1
+                                                      ? theme.dred22
+                                                      : Color.fromRGBO(
+                                                          252, 252, 252, 0.72),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        "Unread",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      InkWell(
+                                                          child: Icon(
+                                                        filter == 1
+                                                            ? Icons.close
+                                                            : Icons.add,
+                                                        color: Colors.black,
+                                                        size: 15,
+                                                      )),
+                                                    ],
+                                                  ),
+                                                  25, () {
+                                                //
+                                                setState(() {
+                                                  filter = 1;
+                                                });
+                                              }, 7, opt: 2, bc: theme.dred1),
+                                            ),
+                                            SizedBox(width: 10),
+                                            Tooltip(
+                                              message: "Favorites Chats",
+                                              waitDuration:
+                                                  Duration(microseconds: 200),
+                                              preferBelow: false,
+                                              child: customButton(
+                                                  filter == 2
+                                                      ? theme.dred22
+                                                      : Color.fromRGBO(
+                                                          252, 252, 252, 0.72),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        "Favorites",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      InkWell(
+                                                          child: Icon(
+                                                        filter == 2
+                                                            ? Icons.close
+                                                            : Icons.add,
+                                                        color: Colors.black,
+                                                        size: 15,
+                                                      )),
+                                                    ],
+                                                  ),
+                                                  25, () {
+                                                //
+                                                setState(() {
+                                                  filter = 2;
+                                                });
+                                              }, 7, opt: 2, bc: theme.dred1),
+                                            ),
+                                            SizedBox(width: 10),
+                                            Tooltip(
+                                              message: "All Group Chats",
+                                              waitDuration:
+                                                  Duration(microseconds: 200),
+                                              preferBelow: false,
+                                              child: customButton(
+                                                  filter == 3
+                                                      ? theme.dred22
+                                                      : Color.fromRGBO(
+                                                          252, 252, 252, 0.72),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        "Groups",
+                                                        maxLines: 1,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      InkWell(
+                                                          child: Icon(
+                                                        filter == 3
+                                                            ? Icons.close
+                                                            : Icons.add,
+                                                        color: Colors.black,
+                                                        size: 15,
+                                                      )),
+                                                    ],
+                                                  ),
+                                                  25, () {
+                                                //
+                                                setState(() {
+                                                  filter = 3;
+                                                });
+                                              }, 7, opt: 2, bc: theme.dred1),
+                                            ),
+                                          ]),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          //
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 5),
+                                          decoration: BoxDecoration(
+                                              color: Colors
+                                                  .transparent), //gradient: const LinearGradient(colors: [ Colors.transparent, theme.dred2, theme.dred2]) ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                  flex: 0,
+                                                  child: Container(
+                                                      height: 50,
+                                                      width: 50,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        color:
+                                                            Colors.transparent,
+                                                      ),
+                                                      // padding: EdgeInsets.all(80),
+                                                      child: Icon(
+                                                        Icons.archive_outlined,
+                                                        size: 30,
+                                                        color: Colors.black,
+                                                      ))
+
+                                                  // CircleAvatar(radius: 30, child: dom.img.isEmpty ?
+                                                  // Text(user.nom[0], style: wtTitle(40, 1, Colors.white, true, false), textAlign: TextAlign.center,) : Image.network('$urlserveur/${dom.img}') ),
+
+                                                  ),
+                                              //
+                                              //
+                                              Expanded(
+                                                flex: 1,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 5.0, left: 8),
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Expanded(
+                                                              flex: 1,
+                                                              child: Container(
+                                                                  child: Text(
+                                                                'Archived Chats',
+                                                                style: wtTitle(
+                                                                    16,
+                                                                    1,
+                                                                    Colors
+                                                                        .black,
+                                                                    true,
+                                                                    false),
+                                                                maxLines: 1,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                              ))),
+                                                          Expanded(
+                                                            flex: 0,
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 5,
+                                                                      right: 1),
+                                                              child: Container(
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                          shape:
+                                                                              BoxShape.circle),
+                                                                  child: InkWell(
+                                                                      onTap: () {
+                                                                        //
+                                                                      },
+                                                                      child: CircleAvatar(
+                                                                        radius:
+                                                                            13,
+                                                                        backgroundColor:
+                                                                            theme.dred2,
+                                                                        child:
+                                                                            Text(
+                                                                          int.parse(archived) > 9
+                                                                              ? "9+"
+                                                                              : archived,
+                                                                          style: wtTitle(
+                                                                              13,
+                                                                              1,
+                                                                              Colors.white,
+                                                                              true,
+                                                                              false),
+                                                                        ),
+                                                                      ))),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+
+                                                      //
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      ...chatLst.map(
+                                        (e) {
+                                          return mdChat(
+                                              context,
+                                              e,
+                                              chatSelectionList.contains(e),
+                                              e.lastMsg.userId ==
+                                                  connectedUser.profile.id, () {
+                                            setState(() {
+                                              if (!e.checked) {
+                                                chatSelectionList.add(e);
+                                              }
+                                            });
+                                          }, () {
+                                            setState(() {
+                                              if (chatSelectionList
+                                                  .isNotEmpty) {
+                                                if (chatSelectionList
+                                                    .contains(e)) {
+                                                  chatSelectionList.remove(e);
+                                                } else {
+                                                  chatSelectionList.add(e);
+                                                }
+                                              } else {
+                                                // ouvrir
+                                                chatSelectionList.clear();
+                                                // ouvrirO(context, ChatScreenTest());
+                                                ouvrirO(
+                                                    context,
+                                                    ChatContent(
+                                                      chat: e,
+                                                    ));
+                                              }
+                                            });
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  )),
+                            );
+                    })),

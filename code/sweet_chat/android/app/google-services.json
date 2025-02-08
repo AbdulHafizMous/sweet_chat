@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "830961551666",
+    "project_id": "sweet-chat-vf",
+    "storage_bucket": "sweet-chat-vf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830961551666:android:a15b674b2c4f347c24ef2b",
+        "android_client_info": {
+          "package_name": "com.example.sweet_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830961551666-vqvj2ck5i3a5cmm1i0nlmnt62o7a7jes.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sweet_chat",
+            "certificate_hash": "fb4c6595d42f142a0de811b0072ca3c2d638b245"
+          }
+        },
+        {
+          "client_id": "830961551666-9646g1u8kn2e5i19pt4kpp39fubmv8j6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqpv0hk8tvy3W8Qr1hCvl66IJkDO_VXuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830961551666-9646g1u8kn2e5i19pt4kpp39fubmv8j6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "830961551666-dhot8b09509usi56eqa477ooik4g2p4n.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sweetChat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
